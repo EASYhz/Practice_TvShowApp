@@ -39,7 +39,7 @@
           </LinearLayout>
 
             <LinearLayout
-              android:id="@+id/episodesLinearLayout"
+              android:id="@+id/webTvShowLinearLayout"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
@@ -48,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvShowLinearLayout">
               <TextView
-                  android:text="Tv Shows"
+                  android:text="Web Tv Shows On Yesterday"
                   android:textColor="@color/white"
                   android:textSize="25dp"
                   android:textStyle="bold"
@@ -56,7 +56,7 @@
                   android:layout_height="wrap_content"/>
 
               <androidx.recyclerview.widget.RecyclerView
-                  android:id="@+id/episodesRecyclerView"
+                  android:id="@+id/webTvShowRecyclerView"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent" />
           </LinearLayout>
@@ -68,7 +68,7 @@
               android:padding="16dp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/episodesLinearLayout">
+              app:layout_constraintTop_toBottomOf="@+id/webTvShowLinearLayout">
               <TextView
                   android:text="Tv Shows"
                   android:textColor="@color/white"

@@ -9,8 +9,8 @@ interface TvShowService {
     @GET("/shows")
     suspend fun getTvShows(): Response<TvShow>
 
-    @GET("/schedule")
-    suspend fun getTvShowOnYesterday(@Query("date") date: String) : Response<TvShow>   // 어제 tvShow 보기
+    @GET("/schedule/web")
+    suspend fun getWebTvShowOnYesterday(@Query("date") date: String) : Response<TvShow>   // 어제 tvShow 보기
 
 }
 

@@ -14,7 +14,7 @@ class TvShowRepository
         return tvShowService.getTvShows()
     }
 
-    suspend fun getTvShowsOnYesterday(date: String) : Response<TvShow> {
-        return tvShowService.getTvShowOnYesterday(date = date)
+    suspend fun getWebTvShowOnYesterday(date: String) : Response<TvShow> {
+        return tvShowService.getWebTvShowOnYesterday(date = date)
     }
 }

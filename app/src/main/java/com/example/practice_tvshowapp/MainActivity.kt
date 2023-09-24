@@ -15,10 +15,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val tvShowViewModel: TvShowViewModel by viewModels()
     private lateinit var tvShowAdapter: TvShowAdapter
+    private lateinit var webTvShowAdapter: TvShowAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setUp()
+
+    }
+
+    private fun setUp() {
+        setTvShowView()
+        setWebTvShowView()
+    }
+
+    private fun setTvShowView() {
         tvShowAdapter = TvShowAdapter()
 
         binding.tvShowRecyclerView.apply {
@@ -31,9 +44,25 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
-
         tvShowViewModel.tvShowResponse.observe(this) { tvShowItem ->
             tvShowAdapter.tvShows = tvShowItem
+        }
+    }
+
+    private fun setWebTvShowView() {
+
+        webTvShowAdapter = TvShowAdapter()
+
+        binding.webTvShowRecyclerView.apply {
+            adapter = webTvShowAdapter
+            layoutManager = LinearLayoutManager(
+                this@MainActivity, LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        }
+
+        tvShowViewModel.webTvShowResponse.observe(this) { webTvShowItem ->
+            webTvShowAdapter.tvShows = webTvShowItem
         }
     }
 }

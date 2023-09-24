@@ -43,8 +43,7 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
         holder.binding.apply {
             tvShowTitle.text = currentTvShow.name
-
-            tvShowImageView.load(currentTvShow.image.original) {
+            tvShowImageView.load(currentTvShow.image?.original) {
                 crossfade(true)
                 crossfade(1000)
             }
