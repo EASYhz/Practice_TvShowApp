@@ -9,7 +9,9 @@ import coil.load
 import com.example.practice_tvshowapp.databinding.TvShowLayoutAdapterBinding
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 
-class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+class TvShowAdapter(
+    private val onItemClickListener: (TvShowItem) -> Unit
+):RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     inner class TvShowViewHolder(val binding: TvShowLayoutAdapterBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,11 +26,12 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-        var tvShows: List<TvShowItem>
-            get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
+
+    var tvShows: List<TvShowItem>
+        get() = differ.currentList
+    set(value) {
+        differ.submitList(value)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
         return TvShowViewHolder(
@@ -48,10 +51,15 @@ class TvShowAdapter:RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                 crossfade(1000)
             }
         }
+
+        holder.binding.root.setOnClickListener {
+            onItemClickListener(currentTvShow)
+        }
     }
+
+
 
     override fun getItemCount(): Int {
         return tvShows.size
     }
-
 }

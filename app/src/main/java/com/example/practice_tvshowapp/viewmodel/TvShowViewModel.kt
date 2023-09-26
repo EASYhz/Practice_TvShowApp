@@ -35,7 +35,6 @@ class TvShowViewModel
             } else {
                 Log.d("TvShowViewModel >> ", "getAllTvShows Error: ${response.code()}")
             }
-
         }
     }
 

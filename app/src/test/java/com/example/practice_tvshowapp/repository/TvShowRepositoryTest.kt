@@ -8,13 +8,17 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import java.text.SimpleDateFormat
 import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class TvShowRepositoryTest {
     private lateinit var repository: TvShowRepository
     private lateinit var tvShowService: TvShowService
+
+    /**
+     *  원래는 mockWebServer 로 독립적으로 테스트 해야 됨.
+     */
+
 
     @BeforeAll
     fun setUp() {
@@ -51,5 +55,13 @@ internal class TvShowRepositoryTest {
         val actualResponse = repository.getWebTvShowOnYesterday(finalResultDate)
         val tvShow = listOf(actualResponse.body()?.get(0)?.airdate, actualResponse.body()?.get(1)?.airdate)
         assertEquals(mockValue, tvShow)
+    }
+
+    @Test
+    fun `Get Tv Show Episodes with TvShowId of 1`() = runTest {
+        val tvShowId = (1..20).random()
+        val mockValue = 1
+        val actualResponse = repository.getTvShowEpisodes(tvShowId)
+        assertEquals(mockValue, actualResponse.body()?.get(0)?.number )
     }
 }
