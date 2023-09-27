@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+<layout>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +25,7 @@
                     app:cardCornerRadius="10dp"
                     >
                     <ImageView
-                        android:id="@+id/tvShowImageView"
+                        android:id="@+id/episodeImageView"
                         android:layout_width="192dp"
                         android:layout_height="108dp"
                         android:scaleType="fitXY"
@@ -41,6 +38,7 @@
                     android:orientation="vertical"
                     android:layout_margin="20dp">
                     <TextView
+                        android:id="@+id/episodeTitleTextView"
                         android:text="1. pilot"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -49,6 +47,7 @@
                         android:layout_height="wrap_content">
                     </TextView>
                     <TextView
+                        android:id="@+id/episodeTimeTextView"
                         android:text="60 min"
                         android:textSize="15sp"
                         android:textColor="@color/white"
@@ -59,7 +58,7 @@
                 </LinearLayout>
             </LinearLayout>
             <TextView
-                android:id="@+id/tvShowTitle"
+                android:id="@+id/episodeSummaryTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="When the residents of Chester's Mill find themselves trapped under a massive transparent dome with no way out, they struggle to survive as resources rapidly dwindle and panic quickly escalates."

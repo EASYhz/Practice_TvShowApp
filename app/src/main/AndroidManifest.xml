@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Practice_TvShowApp"
         tools:targetApi="31">
         <activity
-            android:name=".views.TvShowDetailActivity"
+            android:name=".views.EpisodesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -1,6 +1,6 @@
 package com.example.practice_tvshowapp.models.episodes
 
-data class TvShowEpisodeItem(
+data class EpisodeItem(
     val _links: Links,
     val airdate: String,
     val airstamp: String,

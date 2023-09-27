@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice_tvshowapp.adapter.TvShowAdapter
 import com.example.practice_tvshowapp.databinding.ActivityMainBinding
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
-import com.example.practice_tvshowapp.views.TvShowDetailActivity
+import com.example.practice_tvshowapp.views.EpisodesActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
    private fun onClickTvShowItem(tvShowId: Int) {
-       val tvShowIntent = Intent(this, TvShowDetailActivity::class.java)
+       val tvShowIntent = Intent(this, EpisodesActivity::class.java)
         tvShowIntent.putExtra("tvShowId", tvShowId)
         startActivity(tvShowIntent)
     }

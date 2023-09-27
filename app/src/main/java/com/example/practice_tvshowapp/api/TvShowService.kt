@@ -1,6 +1,6 @@
 package com.example.practice_tvshowapp.api
 
-import com.example.practice_tvshowapp.models.episodes.TvShowEpisode
+import com.example.practice_tvshowapp.models.episodes.Episode
 import com.example.practice_tvshowapp.models.tvshows.TvShow
 import retrofit2.Response
 import retrofit2.http.GET
@@ -15,6 +15,6 @@ interface TvShowService {
     suspend fun getWebTvShowOnYesterday(@Query("date") date: String) : Response<TvShow>   // 어제 tvShow 보기
 
     @GET("/shows/{id}/episodes")
-    suspend fun getTvShowEpisodes(@Path("id") tvShowId: Int) : Response<TvShowEpisode>
+    suspend fun getEpisodes(@Path("id") tvShowId: Int) : Response<Episode>
 }
 

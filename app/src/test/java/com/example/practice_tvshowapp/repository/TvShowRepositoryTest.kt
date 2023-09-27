@@ -61,7 +61,7 @@ internal class TvShowRepositoryTest {
     fun `Get Tv Show Episodes with TvShowId of 1`() = runTest {
         val tvShowId = (1..20).random()
         val mockValue = 1
-        val actualResponse = repository.getTvShowEpisodes(tvShowId)
+        val actualResponse = repository.getEpisodes(tvShowId)
         assertEquals(mockValue, actualResponse.body()?.get(0)?.number )
     }
 }
