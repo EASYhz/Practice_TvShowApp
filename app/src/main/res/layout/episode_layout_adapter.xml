@@ -34,12 +34,12 @@
                 </androidx.cardview.widget.CardView>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="85dp"
                     android:orientation="vertical"
                     android:layout_margin="20dp">
                     <TextView
                         android:id="@+id/episodeTitleTextView"
-                        android:text="1. pilot"
+                        android:text=" "
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -48,7 +48,7 @@
                     </TextView>
                     <TextView
                         android:id="@+id/episodeTimeTextView"
-                        android:text="60 min"
+                        android:text=" "
                         android:textSize="15sp"
                         android:textColor="@color/white"
                         android:layout_marginTop="5dp"

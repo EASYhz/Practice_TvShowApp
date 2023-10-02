@@ -49,7 +49,6 @@ class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.MyViewHolder>() {
             episodeTitleTextView.text = setEpisodeTitle(currentEpisode.season, currentEpisode.number, currentEpisode.name)
             episodeTimeTextView.text = setEpisodeRunTime(currentEpisode.runtime)
             episodeSummaryTextView.text = HtmlCompat.fromHtml(currentEpisode.summary, FROM_HTML_MODE_LEGACY)
-
             episodeImageView.load(currentEpisode.image.original) {
                 crossfade(true)
                 crossfade(1000)

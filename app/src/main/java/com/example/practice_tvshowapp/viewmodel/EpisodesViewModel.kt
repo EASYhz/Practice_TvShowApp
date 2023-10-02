@@ -29,19 +29,4 @@ constructor(
             else Log.d("TvShowEpisodesViewModel > ", "getTvShowEpisodes Error : ${response.code()}")
         }
     }
-
-
-    @AssistedFactory
-    interface EpisodesViewModelFactory {
-        fun create(tvShowId: Int): EpisodesViewModel
-    }
-
-    companion object {
-        fun provideFactory(tvShowEpisodesViewModelFactory: EpisodesViewModelFactory, tvShowId: Int) : ViewModelProvider.Factory =
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return tvShowEpisodesViewModelFactory.create(tvShowId) as T
-                }
-            }
-    }
 }

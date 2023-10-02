@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface TvShowService {
     @GET("/shows")
-    suspend fun getTvShows(): Response<TvShow>
+    suspend fun getTvShows(@Query("page") page: Int): Response<TvShow>
 
     @GET("/schedule/web")
     suspend fun getWebTvShowOnYesterday(@Query("date") date: String) : Response<TvShow>   // 어제 tvShow 보기

@@ -41,9 +41,14 @@ internal class TvShowRepositoryTest {
             1, 2
         )
         val actualResponse = repository.getAllTvShows()
-        val tvShow = listOf(actualResponse.body()?.get(0)?.id, actualResponse.body()?.get(1)?.id)
-        assertEquals(mockTvShow, tvShow)
+        assertEquals(6, actualResponse.size)
     }
+//
+//    @Test
+//    fun `Get Tv Show on Page Api Test `() = runTest {
+//        val actualResponse = repository.getAllTvShowsPage(1)
+//        assertEquals(250, actualResponse.body().size)
+//    }
 
     @Test
     fun `Get Tv Show on Yesterday Api Test`() = runTest {
