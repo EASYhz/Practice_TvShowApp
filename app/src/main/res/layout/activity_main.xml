@@ -11,9 +11,32 @@
         android:fillViewport="true"
         android:background="@color/black"
        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tvShowContainerRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tvShowContainerRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/tvShowSkeletonLoadingView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:shimmer_auto_start="true"
+                tools:ignore="MissingConstraints">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <include layout="@layout/tv_show_container_skeleton_loading_layout"/>
+                    <include layout="@layout/tv_show_container_skeleton_loading_layout"/>
+                    <include layout="@layout/tv_show_container_skeleton_loading_layout"/>
+                    <include layout="@layout/tv_show_container_skeleton_loading_layout"/>
+                    <include layout="@layout/tv_show_container_skeleton_loading_layout"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

@@ -7,6 +7,8 @@ import com.example.practice_tvshowapp.repository.TvShowRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class EpisodesViewModel
@@ -19,14 +21,20 @@ constructor(
     val tvShowEpisodeResponse : LiveData<List<EpisodeItem>>
         get() = _tvShowEpisodeResponse
 
+    private val _isLoadingState = MutableStateFlow(true)
+    val isLoadingState : StateFlow<Boolean>
+        get() = _isLoadingState
+
     init {
         getEpisodes(tvShowId)
     }
 
     private fun getEpisodes(tvShowId: Int) = viewModelScope.launch {
         repository.getEpisodes(tvShowId).let { response ->
-            if(response.isSuccessful) _tvShowEpisodeResponse.postValue(response.body())
-            else Log.d("TvShowEpisodesViewModel > ", "getTvShowEpisodes Error : ${response.code()}")
+            if(response.isSuccessful) {
+                _tvShowEpisodeResponse.postValue(response.body())
+                _isLoadingState.value = false
+            } else Log.d("TvShowEpisodesViewModel > ", "getTvShowEpisodes Error : ${response.code()}")
         }
     }
 }

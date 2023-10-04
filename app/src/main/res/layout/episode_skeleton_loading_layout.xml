@@ -29,7 +29,7 @@
                         android:layout_width="192dp"
                         android:layout_height="108dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/skeleton_image_shape"
                         />
                 </androidx.cardview.widget.CardView>
                 <LinearLayout
@@ -46,7 +46,8 @@
                         android:maxLines="2"
                         android:ellipsize="end"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/skeletonTextGray">
                     </TextView>
                     <TextView
                         android:id="@+id/episodeTimeTextView"
@@ -54,21 +55,22 @@
                         android:textSize="15sp"
                         android:textColor="@color/white"
                         android:layout_marginTop="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:background="@color/skeletonTextGray"
+                        android:layout_width="50dp"
+                        android:layout_height="25dp">
                     </TextView>
                 </LinearLayout>
             </LinearLayout>
             <TextView
                 android:id="@+id/episodeSummaryTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="When the residents of Chester's Mill find themselves trapped under a massive transparent dome with no way out, they struggle to survive as resources rapidly dwindle and panic quickly escalates."
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:maxLines="3"
                 android:ellipsize="end"
                 android:layout_margin="8dp"
+                android:background="@color/skeletonTextGray"
                 />
         </LinearLayout>
 

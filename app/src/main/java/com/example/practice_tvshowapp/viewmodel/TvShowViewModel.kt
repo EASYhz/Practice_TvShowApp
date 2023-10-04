@@ -8,6 +8,8 @@ import com.example.practice_tvshowapp.repository.TvShowRepository
 import com.example.practice_tvshowapp.utils.CommonUtils.getYesterdayDate
 import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +26,10 @@ class TvShowViewModel
     val webTvShowResponse : LiveData<List<TvShowItem>>
         get() = _webTvShowResponse
 
+    private val _isLoadingState = MutableStateFlow(true)
+    val isLoadingState : StateFlow<Boolean>
+        get() = _isLoadingState
+
     init {
         getAllTvShows()
         getAllWebTvShows()
@@ -32,6 +38,7 @@ class TvShowViewModel
     private fun getAllTvShows() = viewModelScope.launch {
         repository.getAllTvShows().let { response ->
             _tvShowResponse.value = response
+            _isLoadingState.value = false
         }
     }
 
