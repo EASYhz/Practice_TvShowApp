@@ -1,10 +1,9 @@
 package com.example.practice_tvshowapp.utils
 
 import android.view.View
-import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 
-class LoadingUtils {
+object LoadingUtils {
 
     fun setLoadingView(
         loadingView: ShimmerFrameLayout,

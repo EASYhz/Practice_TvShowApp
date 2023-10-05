@@ -2,8 +2,6 @@ package com.example.practice_tvshowapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +21,6 @@ class EpisodesActivity : AppCompatActivity() {
     private lateinit var viewModel: EpisodesViewModel
     @Inject lateinit var episodesViewModelFactory: EpisodesViewModelFactory.ViewModelFactory
     private lateinit var episodeAdapter: EpisodeAdapter
-    private var loadingUtils: LoadingUtils = LoadingUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +65,7 @@ class EpisodesActivity : AppCompatActivity() {
     private fun subscribeToIsLoadingState() {
         lifecycleScope.launch {
             viewModel.isLoadingState.collectLatest { isLoading ->
-                loadingUtils.setLoadingView(
+                LoadingUtils.setLoadingView(
                     loadingView = binding.episodeSkeletonLoadingView,
                     mainView = binding.episodesRecyclerView,
                     isLoading = isLoading
