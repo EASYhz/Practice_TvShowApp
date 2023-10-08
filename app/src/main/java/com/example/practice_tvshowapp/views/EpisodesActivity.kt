@@ -73,7 +73,6 @@ class EpisodesActivity : AppCompatActivity() {
 
     private fun setTvShowInfo() {
         binding.infoLayout.apply {
-            /* tvShow Info 가져오기 */
             tvShowInfoTitle.text = tvShowItem.name
             tvShowInfoDate.text = getTvShowInfoDate(tvShowItem.premiered, tvShowItem.ended)
             tvShowInfoTime.text = getTvShowInfoTime(tvShowItem.schedule)
