@@ -87,11 +87,14 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-android-compiler:2.42"
     kapt "androidx.hilt:hilt-compiler:1.1.0-alpha01"
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 
     // coil
     implementation "io.coil-kt:coil:2.4.0"
 
     // shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // sticky nested scroll view
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
+
 }

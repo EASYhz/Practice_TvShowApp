@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.EpisodesActivity">
-    <androidx.core.widget.NestedScrollView
+<layout>
+    <com.amar.library.ui.StickyScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".views.EpisodesActivity"
         android:id="@+id/episodeNestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:background="@color/black"
+        app:stickyHeader="@id/tabLayoutContainer"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,12 +22,32 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:orientation="vertical">
-
                 <include layout="@layout/episode_info_layout" android:id="@+id/infoLayout"/>
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/episodeTabLayout"
+                <LinearLayout
+                    android:id="@+id/tabLayoutContainer"
+                    android:background="@color/black"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/episodeTabLayout"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        app:tabSelectedTextColor="@color/white"
+                        app:tabTextColor="@color/skeletonTextGray"
+                        android:background="@color/black"
+                        app:tabIndicatorColor="@color/white"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorHeight="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:background="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/episodeViewPager"
                     android:layout_width="match_parent"
@@ -53,5 +75,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+    </com.amar.library.ui.StickyScrollView>
 </layout>

@@ -13,6 +13,7 @@ import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.example.practice_tvshowapp.factory.EpisodesViewModelFactory
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.types.EpisodesTabsType
+import com.example.practice_tvshowapp.utils.CommonUtils.convertDpToPx
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoDate
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoGenres
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoTime
@@ -78,16 +79,20 @@ class EpisodesActivity : AppCompatActivity() {
     }
 
     private fun setScrollOnTop() {
-        binding.episodeTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) { }
+        binding.apply {
+            episodeTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) { }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                binding.episodeNestedScrollView.smoothScrollTo(0, 0)
-            }
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    if(episodeNestedScrollView.isHeaderSticky) {
+                        episodeNestedScrollView.smoothScrollTo(0, infoLayout.root.height + convertDpToPx(10, this@EpisodesActivity))
+                    }
+                }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) { }
+                override fun onTabReselected(tab: TabLayout.Tab?) { }
 
-        })
+            })
+        }
     }
     private fun subscribeToIsLoadingState() {
         lifecycleScope.launch {
@@ -100,7 +105,6 @@ class EpisodesActivity : AppCompatActivity() {
             }
         }
     }
-
 
     inline fun <reified T : Serializable> Bundle.serializable(key: String): T? = when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializable(key, T::class.java)

@@ -1,9 +1,11 @@
 package com.example.practice_tvshowapp.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import com.example.practice_tvshowapp.models.tvshows.Schedule
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 object CommonUtils {
     private const val DATE_FORMAT = "yyyy-MM-dd"
@@ -17,6 +19,19 @@ object CommonUtils {
 
         return formatter.format(timeToDate)
     }
+
+    /**
+     *  convertDpToPx : dp -> px
+     *  @param dp
+     *  @param context
+     *
+     *  @return px : Int
+     */
+    fun convertDpToPx(dp : Int, context: Context): Int {
+        val density: Float =  context.resources.displayMetrics.density
+        return (dp.toFloat() * density).roundToInt()
+    }
+
 
     /**
      * getTvShowInfoDate
