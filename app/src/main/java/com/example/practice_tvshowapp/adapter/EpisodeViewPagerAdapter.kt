@@ -4,23 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.practice_tvshowapp.types.EpisodesTabsType
-import com.example.practice_tvshowapp.views.fragments.CastsFragment
-import com.example.practice_tvshowapp.views.fragments.EpisodesFragment
 
-class EpisodeViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-    override fun getItemCount(): Int = VIEW_COUNT
+class EpisodeViewPagerAdapter(fragmentActivity: FragmentActivity, private val tabs : Array<EpisodesTabsType>) : FragmentStateAdapter(fragmentActivity) {
+    override fun getItemCount(): Int = tabs.size
 
-    // TODO : 리팩토링
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
-            EpisodesTabsType.EPISODE.ordinal -> EpisodesFragment()
-            EpisodesTabsType.CAST.ordinal -> CastsFragment()
-            else -> EpisodesFragment()
-        }
-    }
-
-
-    companion object {
-        const val VIEW_COUNT = 2
+        return tabs[position].fragment
     }
 }
+

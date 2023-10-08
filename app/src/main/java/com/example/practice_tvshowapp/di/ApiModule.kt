@@ -2,9 +2,7 @@ package com.example.practice_tvshowapp.di
 
 import com.example.practice_tvshowapp.api.TvShowService
 import com.example.practice_tvshowapp.helper.Constants
-import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.google.gson.GsonBuilder
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

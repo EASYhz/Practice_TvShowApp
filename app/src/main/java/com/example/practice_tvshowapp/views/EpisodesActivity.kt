@@ -4,14 +4,9 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
-import com.example.practice_tvshowapp.adapter.CastAdapter
-import com.example.practice_tvshowapp.adapter.EpisodeAdapter
 import com.example.practice_tvshowapp.adapter.EpisodeViewPagerAdapter
 import com.example.practice_tvshowapp.databinding.ActivityEpisodesBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
@@ -75,7 +70,7 @@ class EpisodesActivity : AppCompatActivity() {
 
     private fun setTabLayoutViewPager() {
         binding.apply {
-            episodeViewPager.adapter = EpisodeViewPagerAdapter(this@EpisodesActivity)
+            episodeViewPager.adapter = EpisodeViewPagerAdapter(this@EpisodesActivity, EpisodesTabsType.values())
             TabLayoutMediator(episodeTabLayout, episodeViewPager) { tab, position ->
                 tab.text = tabText[position]
             }.attach()
