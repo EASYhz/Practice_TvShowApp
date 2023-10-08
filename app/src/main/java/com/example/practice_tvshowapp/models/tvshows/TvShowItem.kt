@@ -1,6 +1,8 @@
 package com.example.practice_tvshowapp.models.tvshows
 
-data class TvShowItem(
+import java.io.Serializable
+
+data class TvShowItem (
     val _links: Links,
     val averageRuntime: Int,
     val dvdCountry: DvdCountry,
@@ -25,4 +27,4 @@ data class TvShowItem(
     val url: String,
     val webChannel: WebChannel,
     val weight: Int,
-)
+) : Serializable
