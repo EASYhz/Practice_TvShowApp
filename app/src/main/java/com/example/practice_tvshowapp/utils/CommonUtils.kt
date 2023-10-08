@@ -18,10 +18,6 @@ object CommonUtils {
         return formatter.format(timeToDate)
     }
 
-    /*
-    * "premiered":"2013-06-24","ended":"2015-09-10"
-    * -> 2023-06-24 ~ 2015-09-10
-    * */
     /**
      * getTvShowInfoDate
      *

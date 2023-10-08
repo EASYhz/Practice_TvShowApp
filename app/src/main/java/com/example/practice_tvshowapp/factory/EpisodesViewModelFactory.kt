@@ -10,7 +10,6 @@ class EpisodesViewModelFactory {
     @AssistedFactory
     interface ViewModelFactory {
         fun create(tvShowId: Int): EpisodesViewModel
-
     }
 
     companion object {
@@ -20,7 +19,5 @@ class EpisodesViewModelFactory {
                     return viewModelFactory.create(tvShowId) as T
                 }
             }
-        
-        
     }
 }

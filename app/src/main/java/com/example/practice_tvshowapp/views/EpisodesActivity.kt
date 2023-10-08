@@ -45,7 +45,6 @@ class EpisodesActivity : AppCompatActivity() {
         setUp()
     }
 
-
     private fun setUp() {
         setTvShowInfo()
         setEpisodesView()
@@ -72,10 +71,6 @@ class EpisodesActivity : AppCompatActivity() {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 1. 파라미터로 받기 - 굳이? 라는 느낌..
-    // 2. 전역변수로 관리하기 - 오직 여기만을 위한 함수가.. ->
-    ///////////////////////////////////////////////////////////////////////////
     private fun setTvShowInfo() {
         binding.infoLayout.apply {
             /* tvShow Info 가져오기 */
@@ -90,8 +85,6 @@ class EpisodesActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
     private fun subscribeToIsLoadingState() {
         lifecycleScope.launch {
