@@ -1,7 +1,9 @@
 package com.example.practice_tvshowapp.repository
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.example.practice_tvshowapp.api.TvShowService
+import com.example.practice_tvshowapp.models.casts.Cast
 import com.example.practice_tvshowapp.models.episodes.Episode
 import com.example.practice_tvshowapp.models.tvshows.TvShow
 import com.example.practice_tvshowapp.models.tvshows.TvShowContainer
@@ -12,6 +14,7 @@ class TvShowRepository
 @Inject constructor(
     private val tvShowService: TvShowService
 ) {
+    @SuppressLint("SuspiciousIndentation")
     suspend fun getAllTvShows(): ArrayList<TvShowContainer> {
         val result: ArrayList<TvShowContainer> = ArrayList()
             (0..5).forEach { page ->
@@ -38,5 +41,9 @@ class TvShowRepository
 
     suspend fun getEpisodes(tvShowId: Int) : Response<Episode> {
         return tvShowService.getEpisodes(tvShowId = tvShowId)
+    }
+
+    suspend fun getCasts(tvShowId: Int) : Response<Cast> {
+        return tvShowService.getCasts(tvShowId = tvShowId)
     }
 }

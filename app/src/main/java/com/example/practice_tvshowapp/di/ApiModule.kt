@@ -2,6 +2,7 @@ package com.example.practice_tvshowapp.di
 
 import com.example.practice_tvshowapp.api.TvShowService
 import com.example.practice_tvshowapp.helper.Constants
+import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -20,7 +21,6 @@ object ApiModule {
     @Singleton
     fun tvShowService() : TvShowService = getRetrofitInstance().create(TvShowService::class.java)
 
-
     @Provides
     @Singleton
     fun getRetrofitInstance(): Retrofit {
@@ -31,4 +31,5 @@ object ApiModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
 }

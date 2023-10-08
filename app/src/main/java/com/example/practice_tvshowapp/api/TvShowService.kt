@@ -1,5 +1,6 @@
 package com.example.practice_tvshowapp.api
 
+import com.example.practice_tvshowapp.models.casts.Cast
 import com.example.practice_tvshowapp.models.episodes.Episode
 import com.example.practice_tvshowapp.models.tvshows.TvShow
 import retrofit2.Response
@@ -16,5 +17,8 @@ interface TvShowService {
 
     @GET("/shows/{id}/episodes")
     suspend fun getEpisodes(@Path("id") tvShowId: Int) : Response<Episode>
+
+    @GET("/shows/{id}/cast")
+    suspend fun getCasts(@Path("id") tvShowId: Int) : Response<Cast>
 }
 

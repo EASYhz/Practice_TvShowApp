@@ -4,19 +4,26 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.example.practice_tvshowapp.adapter.CastAdapter
 import com.example.practice_tvshowapp.adapter.EpisodeAdapter
+import com.example.practice_tvshowapp.adapter.EpisodeViewPagerAdapter
 import com.example.practice_tvshowapp.databinding.ActivityEpisodesBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.example.practice_tvshowapp.factory.EpisodesViewModelFactory
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
+import com.example.practice_tvshowapp.types.EpisodesTabsType
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoDate
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoGenres
 import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoTime
 import com.example.practice_tvshowapp.utils.LoadingUtils
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,8 +35,8 @@ class EpisodesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEpisodesBinding
     private lateinit var viewModel: EpisodesViewModel
     @Inject lateinit var episodesViewModelFactory: EpisodesViewModelFactory.ViewModelFactory
-    private lateinit var episodeAdapter: EpisodeAdapter
     private lateinit var tvShowItem: TvShowItem
+    private val tabText = listOf("에피소드", "등장인물")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,28 +54,9 @@ class EpisodesActivity : AppCompatActivity() {
 
     private fun setUp() {
         setTvShowInfo()
-        setEpisodesView()
-        observeEpisode()
+        setTabLayoutViewPager()
+        setScrollOnTop()
         subscribeToIsLoadingState()
-    }
-
-    private fun observeEpisode() {
-        viewModel.tvShowEpisodeResponse.observe(this) { episodes ->
-            episodeAdapter.episodes = episodes
-        }
-    }
-
-    private fun setEpisodesView() {
-        episodeAdapter = EpisodeAdapter()
-
-        binding.episodesRecyclerView.apply {
-            adapter = episodeAdapter
-            layoutManager = LinearLayoutManager(
-                this@EpisodesActivity, LinearLayoutManager.VERTICAL,
-                false
-            )
-            setHasFixedSize(true)
-        }
     }
 
     private fun setTvShowInfo() {
@@ -85,6 +73,27 @@ class EpisodesActivity : AppCompatActivity() {
         }
     }
 
+    private fun setTabLayoutViewPager() {
+        binding.apply {
+            episodeViewPager.adapter = EpisodeViewPagerAdapter(this@EpisodesActivity)
+            TabLayoutMediator(episodeTabLayout, episodeViewPager) { tab, position ->
+                tab.text = tabText[position]
+            }.attach()
+        }
+    }
+
+    private fun setScrollOnTop() {
+        binding.episodeTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) { }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                binding.episodeNestedScrollView.smoothScrollTo(0, 0)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) { }
+
+        })
+    }
     private fun subscribeToIsLoadingState() {
         lifecycleScope.launch {
             viewModel.isLoadingState.collectLatest { isLoading ->
