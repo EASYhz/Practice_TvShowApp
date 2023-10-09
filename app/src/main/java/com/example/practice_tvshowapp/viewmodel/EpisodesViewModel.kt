@@ -40,7 +40,7 @@ constructor(
             if(response.isSuccessful) {
                 _tvShowEpisodeResponse.postValue(response.body())
                 _isLoadingState.value = false
-            } else Log.d("TvShowEpisodesViewModel > ", "getTvShowEpisodes Error : ${response.code()}")
+            } else Log.d("EpisodesViewModel > ", "getTvShowEpisodes Error : ${response.code()}")
         }
     }
 
@@ -48,7 +48,7 @@ constructor(
         repository.getCasts(tvShowId).let { response ->
             if(response.isSuccessful) {
                 _tvShowCastResponse.postValue(response.body())
-            } else Log.d("TvShowEpisodesViewModel > ", "getCasts Error : ${response.code()}")
+            } else Log.d("EpisodesViewModel > ", "getCasts Error : ${response.code()}")
         }
     }
 }

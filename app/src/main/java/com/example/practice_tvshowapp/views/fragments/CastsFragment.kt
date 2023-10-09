@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.practice_tvshowapp.adapter.CastAdapter
 import com.example.practice_tvshowapp.databinding.CastContainerLayoutBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
+import com.example.practice_tvshowapp.views.EpisodesActivity
 
 class CastsFragment : Fragment() {
     lateinit var binding: CastContainerLayoutBinding
     private lateinit var castAdapter: CastAdapter
-    private val viewModel: EpisodesViewModel by activityViewModels()
+    private lateinit var viewModel: EpisodesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +25,8 @@ class CastsFragment : Fragment() {
     ): View {
         binding = CastContainerLayoutBinding.inflate(inflater, container, false)
         castAdapter = CastAdapter()
+        viewModel = ViewModelProvider(activity as EpisodesActivity)[EpisodesViewModel::class.java]
+
         observeCast()
 
         return binding.root
