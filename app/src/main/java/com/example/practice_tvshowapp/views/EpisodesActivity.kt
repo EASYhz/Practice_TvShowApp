@@ -1,9 +1,11 @@
 package com.example.practice_tvshowapp.views
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -64,6 +66,11 @@ class EpisodesActivity : AppCompatActivity() {
             tvShowImageView.load(tvShowItem.image?.original) {
                 crossfade(true)
                 crossfade(1000)
+            }
+
+            moreTextView.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tvShowItem.url))
+                startActivity(intent)
             }
         }
     }
