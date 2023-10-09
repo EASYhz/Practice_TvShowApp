@@ -29,9 +29,9 @@ class TvShowAdapter(
 
     var tvShows: List<TvShowItem>
         get() = differ.currentList
-    set(value) {
-        differ.submitList(value)
-    }
+        set(value) {
+            differ.submitList(value)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
         return TvShowViewHolder(
