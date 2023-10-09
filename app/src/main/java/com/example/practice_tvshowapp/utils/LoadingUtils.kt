@@ -16,7 +16,7 @@ object LoadingUtils {
 
             mainView.visibility = View.INVISIBLE
         } else {
-            loadingView.startShimmer()
+            loadingView.stopShimmer()
             loadingView.visibility = View.GONE
 
             mainView.visibility = View.VISIBLE
