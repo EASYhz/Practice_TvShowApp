@@ -32,7 +32,6 @@ class EpisodesActivity : AppCompatActivity() {
     private lateinit var viewModel: EpisodesViewModel
     @Inject lateinit var episodesViewModelFactory: EpisodesViewModelFactory.ViewModelFactory
     private lateinit var tvShowItem: TvShowItem
-    private val tabText = listOf("에피소드", "등장인물")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +72,7 @@ class EpisodesActivity : AppCompatActivity() {
         binding.apply {
             episodeViewPager.adapter = EpisodeViewPagerAdapter(this@EpisodesActivity, EpisodesTabsType.values())
             TabLayoutMediator(episodeTabLayout, episodeViewPager) { tab, position ->
-                tab.text = tabText[position]
+                tab.text = EpisodesTabsType.values()[position].tabTitle
             }.attach()
         }
     }

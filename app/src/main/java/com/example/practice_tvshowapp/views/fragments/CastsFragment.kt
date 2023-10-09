@@ -29,15 +29,11 @@ class CastsFragment : Fragment() {
         castAdapter = CastAdapter()
         viewModel = ViewModelProvider(activity as EpisodesActivity)[EpisodesViewModel::class.java]
         currentOrientation = resources.configuration.orientation
+
         observeCast()
+        setCastsView()
 
         return binding.root
-    }
-
-
-    override fun onResume() {
-        setCastsView()
-        super.onResume()
     }
 
     private fun observeCast() {

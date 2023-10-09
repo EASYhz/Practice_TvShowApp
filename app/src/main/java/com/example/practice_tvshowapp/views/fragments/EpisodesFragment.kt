@@ -26,13 +26,9 @@ class EpisodesFragment : Fragment() {
         viewModel = ViewModelProvider(activity as EpisodesActivity)[EpisodesViewModel::class.java]
 
         observeEpisode()
+        setEpisodesView()
 
         return binding.root
-    }
-
-    override fun onResume() {
-        setEpisodesView()
-        super.onResume()
     }
 
     private fun observeEpisode() {
