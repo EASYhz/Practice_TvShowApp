@@ -35,7 +35,10 @@ class CastsFragment : Fragment() {
 
         return binding.root
     }
-
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
     private fun observeCast() {
         viewModel.tvShowCastResponse.observe(this) { casts ->
             castAdapter.casts = casts

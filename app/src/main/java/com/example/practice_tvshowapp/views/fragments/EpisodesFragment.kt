@@ -30,6 +30,10 @@ class EpisodesFragment : Fragment() {
 
         return binding.root
     }
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 
     private fun observeEpisode() {
         viewModel.tvShowEpisodeResponse.observe(viewLifecycleOwner) { episodes ->

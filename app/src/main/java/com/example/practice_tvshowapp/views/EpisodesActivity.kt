@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -45,7 +44,6 @@ class EpisodesActivity : AppCompatActivity() {
         viewModel = viewModels<EpisodesViewModel> {
             EpisodesViewModelFactory.provideFactory(episodesViewModelFactory, tvShowItem.id)
         }.value
-
         setUp()
     }
 

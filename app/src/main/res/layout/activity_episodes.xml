@@ -13,7 +13,7 @@
         app:stickyHeader="@id/tabLayoutContainer"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -85,8 +85,6 @@
                     <include layout="@layout/episode_skeleton_loading_layout"/>
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        </RelativeLayout>
     </com.amar.library.ui.StickyScrollView>
 </layout>
