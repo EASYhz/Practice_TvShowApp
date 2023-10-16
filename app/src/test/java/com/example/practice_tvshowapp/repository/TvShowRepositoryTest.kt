@@ -19,7 +19,6 @@ internal class TvShowRepositoryTest {
      *  원래는 mockWebServer 로 독립적으로 테스트 해야 됨.
      */
 
-
     @BeforeAll
     fun setUp() {
         tvShowService = ApiModule.tvShowService()
@@ -69,5 +68,13 @@ internal class TvShowRepositoryTest {
         val tvShowId = (1..20).random()
         val actualResponse = repository.getCasts(tvShowId)
         assert(actualResponse.body()?.size!! > 0)
+    }
+
+    @Test
+    fun `Search Tv Shows`() = runTest {
+        val terms = "girls"
+        val mockValue = "Girls"
+        val actualResponse = repository.searchTvShows(terms)
+        assertEquals(mockValue , actualResponse.body()?.get(0)?.show?.name)
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.practice_tvshowapp.api.TvShowService
 import com.example.practice_tvshowapp.models.casts.Cast
 import com.example.practice_tvshowapp.models.episodes.Episode
+import com.example.practice_tvshowapp.models.tvshows.SearchTvShow
 import com.example.practice_tvshowapp.models.tvshows.TvShow
 import com.example.practice_tvshowapp.models.tvshows.TvShowContainer
 import retrofit2.Response
@@ -45,5 +46,9 @@ class TvShowRepository
 
     suspend fun getCasts(tvShowId: Int) : Response<Cast> {
         return tvShowService.getCasts(tvShowId = tvShowId)
+    }
+
+    suspend fun searchTvShows(terms: String) : Response<SearchTvShow> {
+        return tvShowService.searchTvShows(terms = terms)
     }
 }

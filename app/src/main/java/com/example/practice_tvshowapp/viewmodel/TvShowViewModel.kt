@@ -2,11 +2,12 @@ package com.example.practice_tvshowapp.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.practice_tvshowapp.models.tvshows.SearchTvShow
+import com.example.practice_tvshowapp.models.tvshows.SearchTvShowItem
 import com.example.practice_tvshowapp.models.tvshows.TvShowContainer
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.repository.TvShowRepository
 import com.example.practice_tvshowapp.utils.CommonUtils.getYesterdayDate
-import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,9 +27,17 @@ class TvShowViewModel
     val webTvShowResponse : LiveData<List<TvShowItem>>
         get() = _webTvShowResponse
 
+    private val _searchTvShowResponse = MutableLiveData<ArrayList<SearchTvShowItem>>()
+    val searchTvShowResponse: LiveData<ArrayList<SearchTvShowItem>>
+        get() = _searchTvShowResponse
+
     private val _isLoadingState = MutableStateFlow(true)
     val isLoadingState : StateFlow<Boolean>
         get() = _isLoadingState
+
+    private val _isEmptyState = MutableStateFlow(false)
+    val isEmptyState : StateFlow<Boolean>
+        get() = _isEmptyState
 
     init {
         getAllTvShows()
@@ -50,6 +59,30 @@ class TvShowViewModel
                 Log.d("TvShowViewModel >> ", "getAllWebTvShows Error: ${response.code()}")
             }
         }
+    }
+
+    fun searchTvShows(terms: String) = viewModelScope.launch {
+        _isLoadingState.value = true
+        repository.searchTvShows(terms = terms).let { response ->
+            if(response.isSuccessful) {
+                Log.d("aaaaa", "sdfjsdaofijwoweifk 1")
+                _isLoadingState.value = false
+                setEmptyText()
+                _searchTvShowResponse.postValue(response.body())
+            } else {
+                Log.d("TvShowViewModel >> ", "searchTvShows Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun setIsLoading() {
+        _isLoadingState.value = true
+        _searchTvShowResponse.postValue(SearchTvShow())
+        setEmptyText()
+    }
+
+    private fun setEmptyText() {
+        _isEmptyState.value = (!_isLoadingState.value && _searchTvShowResponse.value.isNullOrEmpty())
     }
 
 }

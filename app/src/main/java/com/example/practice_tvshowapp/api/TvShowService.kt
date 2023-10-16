@@ -2,6 +2,7 @@ package com.example.practice_tvshowapp.api
 
 import com.example.practice_tvshowapp.models.casts.Cast
 import com.example.practice_tvshowapp.models.episodes.Episode
+import com.example.practice_tvshowapp.models.tvshows.SearchTvShow
 import com.example.practice_tvshowapp.models.tvshows.TvShow
 import retrofit2.Response
 import retrofit2.http.GET
@@ -20,5 +21,8 @@ interface TvShowService {
 
     @GET("/shows/{id}/cast")
     suspend fun getCasts(@Path("id") tvShowId: Int) : Response<Cast>
+
+    @GET("/search/shows")
+    suspend fun searchTvShows(@Query("q") terms: String) : Response<SearchTvShow>
 }
 

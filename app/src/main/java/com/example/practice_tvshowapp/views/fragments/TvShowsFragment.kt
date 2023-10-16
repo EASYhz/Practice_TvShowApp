@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +32,12 @@ class TvShowsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTvShowsBinding.inflate(inflater, container, false)
+
         tvShowViewModel = ViewModelProvider(activity as MainActivity)[TvShowViewModel::class.java]
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            displayOptions = ActionBar.DISPLAY_SHOW_TITLE
+        }
 
         setUp()
 
