@@ -8,11 +8,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/mainFrameLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/mainBottomNavigationView"
             />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/mainBottomNavigationView"
             android:background="@color/black"
@@ -21,7 +25,7 @@
             app:itemRippleColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/mainFrameLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_navigation_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
