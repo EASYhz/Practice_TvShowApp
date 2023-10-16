@@ -63,12 +63,12 @@ class TvShowViewModel
 
     fun searchTvShows(terms: String) = viewModelScope.launch {
         _isLoadingState.value = true
+        _isEmptyState.value = false
         repository.searchTvShows(terms = terms).let { response ->
             if(response.isSuccessful) {
-                Log.d("aaaaa", "sdfjsdaofijwoweifk 1")
                 _isLoadingState.value = false
-                setEmptyText()
-                _searchTvShowResponse.postValue(response.body())
+                if(response.body().isNullOrEmpty()) _isEmptyState.value = true
+                else _searchTvShowResponse.postValue(response.body())
             } else {
                 Log.d("TvShowViewModel >> ", "searchTvShows Error: ${response.code()}")
             }
@@ -77,12 +77,8 @@ class TvShowViewModel
 
     fun setIsLoading() {
         _isLoadingState.value = true
+        _isEmptyState.value = false
         _searchTvShowResponse.postValue(SearchTvShow())
-        setEmptyText()
-    }
-
-    private fun setEmptyText() {
-        _isEmptyState.value = (!_isLoadingState.value && _searchTvShowResponse.value.isNullOrEmpty())
     }
 
 }

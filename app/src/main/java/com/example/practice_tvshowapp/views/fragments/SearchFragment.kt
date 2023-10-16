@@ -135,15 +135,15 @@ class SearchFragment : Fragment() {
     }
 
     private fun subscribeToIsLoadingState() = lifecycleScope.launch {
-            tvShowViewModel.isLoadingState.collectLatest {
-                binding.circleLoading.visibility = if(it) View.VISIBLE else View.INVISIBLE
-            }
+        tvShowViewModel.isLoadingState.collectLatest {
+            binding.circleLoading.visibility = if(it) View.VISIBLE else View.INVISIBLE
+        }
 
     }
 
     private fun subscribeIsEmptyState() = lifecycleScope.launch {
         tvShowViewModel.isEmptyState.collectLatest {
-            binding.emptyTextView.visibility = if(it) View.VISIBLE else View.GONE
+            binding.emptyTextView.visibility = if(it) View.VISIBLE else View.INVISIBLE
         }
     }
 
