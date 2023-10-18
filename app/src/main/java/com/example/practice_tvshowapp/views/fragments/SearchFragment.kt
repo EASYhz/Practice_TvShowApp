@@ -40,23 +40,24 @@ class SearchFragment : Fragment() {
         searchBinding = SearchActionbarLayoutBinding.inflate(layoutInflater, null, false)
         searchView = searchBinding.searchView
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            customView = searchBinding.root
-            customView.layoutParams = Toolbar.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.MATCH_PARENT)
-        }
-
         tvShowViewModel = ViewModelProvider(activity as MainActivity)[TvShowViewModel::class.java]
 
+        setActionBar()
         setUp()
 
         return binding.root
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
         searchView.clearFocus()
+    }
+    private fun setActionBar() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+            customView = searchBinding.root
+            customView.layoutParams = Toolbar.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.MATCH_PARENT)
+        }
     }
 
     private fun setUp() {
@@ -70,13 +71,14 @@ class SearchFragment : Fragment() {
 
     private fun setSearchView() {
         searchView.apply {
+            isIconified = false
+            requestFocus()
+
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 private var job: Job? = null
 
                 override fun onQueryTextSubmit(p0: String?): Boolean {
-                    p0?.let {
-                        tvShowViewModel.searchTvShows(it)
-                    }
+                    searchTvShows(p0)
                     return true
                 }
 
@@ -85,15 +87,17 @@ class SearchFragment : Fragment() {
                     tvShowViewModel.setIsLoading()
                     job = CoroutineScope(Dispatchers.Main).launch {
                         delay(1500) // 1.5초 지연
-                        p0?.let {
-                            tvShowViewModel.searchTvShows(it)
-                        }
+                        searchTvShows(p0)
                     }
                     return true
                 }
             })
-            isIconified = false
-            requestFocus()
+        }
+    }
+
+    private fun searchTvShows(terms: String?) {
+        terms?.let {
+            tvShowViewModel.searchTvShows(it)
         }
     }
 
@@ -138,7 +142,6 @@ class SearchFragment : Fragment() {
         tvShowViewModel.isLoadingState.collectLatest {
             binding.circleLoading.visibility = if(it) View.VISIBLE else View.INVISIBLE
         }
-
     }
 
     private fun subscribeIsEmptyState() = lifecycleScope.launch {
@@ -147,9 +150,5 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun filterTvShows(searchTvShow: SearchTvShow): List<TvShowItem> {
-        return searchTvShow.map { it.show }
-    }
-
-
+    private fun filterTvShows(searchTvShow: SearchTvShow): List<TvShowItem> = searchTvShow.map { it.show }
 }
