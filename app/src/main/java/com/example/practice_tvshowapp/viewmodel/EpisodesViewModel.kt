@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.practice_tvshowapp.models.casts.CastItem
 import com.example.practice_tvshowapp.models.episodes.EpisodeItem
+import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.repository.TvShowRepository
 import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +30,10 @@ constructor(
     val isLoadingState : StateFlow<Boolean>
         get() = _isLoadingState
 
+    private val _tvShowInfo = MutableLiveData<TvShowItem>()
+    val tvShowInfo : LiveData<TvShowItem>
+        get() = _tvShowInfo
+
     init {
         getEpisodes(tvShowId)
         getCasts(tvShowId)
@@ -51,4 +55,9 @@ constructor(
             } else Log.d("EpisodesViewModel > ", "getCasts Error : ${response.code()}")
         }
     }
+
+    fun setTvShowInfo(data: TvShowItem) {
+        _tvShowInfo.value = data
+    }
+
 }

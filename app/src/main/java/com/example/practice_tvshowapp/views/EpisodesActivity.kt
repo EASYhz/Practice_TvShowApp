@@ -30,7 +30,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class EpisodesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEpisodesBinding
-    private lateinit var viewModel: EpisodesViewModel
+    private lateinit var episodeViewModel: EpisodesViewModel
     @Inject lateinit var episodesViewModelFactory: EpisodesViewModelFactory.ViewModelFactory
     private lateinit var tvShowItem: TvShowItem
 
@@ -41,9 +41,11 @@ class EpisodesActivity : AppCompatActivity() {
         val episodesIntent = intent
         tvShowItem = episodesIntent.serializable("tvShowItem")!!
 
-        viewModel = viewModels<EpisodesViewModel> {
+        episodeViewModel = viewModels<EpisodesViewModel> {
             EpisodesViewModelFactory.provideFactory(episodesViewModelFactory, tvShowItem.id)
         }.value
+        episodeViewModel.setTvShowInfo(tvShowItem)
+
         setUp()
     }
 
@@ -56,16 +58,7 @@ class EpisodesActivity : AppCompatActivity() {
 
     private fun setTvShowInfo() {
         binding.infoLayout.apply {
-            tvShowInfoTitle.text = tvShowItem.name
-            tvShowInfoDate.text = getTvShowInfoDate(tvShowItem.premiered, tvShowItem.ended)
-            tvShowInfoTime.text = getTvShowInfoTime(tvShowItem.schedule)
-            tvShowInfoGenres.text = getTvShowInfoGenres(tvShowItem.genres)
-            tvShowInfoRating.text = tvShowItem.rating.average.toString()
-            tvShowImageView.load(tvShowItem.image?.original) {
-                crossfade(true)
-                crossfade(1000)
-            }
-
+            viewModel = episodeViewModel
             moreTextView.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tvShowItem.url))
                 startActivity(intent)
@@ -100,7 +93,7 @@ class EpisodesActivity : AppCompatActivity() {
     }
     private fun subscribeToIsLoadingState() {
         lifecycleScope.launch {
-            viewModel.isLoadingState.collectLatest { isLoading ->
+            episodeViewModel.isLoadingState.collectLatest { isLoading ->
                 LoadingUtils.setLoadingView(
                     loadingView = binding.episodeSkeletonLoadingView,
                     mainView = binding.episodeContainerLayout,

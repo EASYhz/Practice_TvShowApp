@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.practice_tvshowapp.viewmodel.EpisodesViewModel" />
+    </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -15,6 +20,7 @@
             >
             <ImageView
                 android:id="@+id/tvShowImageView"
+                image_src="@{viewModel.tvShowInfo.image.original}"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
                 android:scaleType="fitXY"
@@ -30,7 +36,7 @@
 
             <TextView
                 android:id="@+id/tvShowInfoTitle"
-                android:text="Tv Show Title"
+                android:text="@{viewModel.tvShowInfo.name}"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -39,21 +45,22 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvShowInfoDate"
-                android:text="premiered ~ Ended"
+                premiered="@{viewModel.tvShowInfo.premiered}"
+                ended="@{viewModel.tvShowInfo.ended}"
                 android:textColor="@color/white"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvShowInfoTime"
-                android:text="Tue, Fri 9:00"
+                time_text="@{viewModel.tvShowInfo.schedule}"
                 android:textColor="@color/white"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvShowInfoGenres"
-                android:text="Action  |  Crime  |  Science-Fiction"
+                genre_text="@{viewModel.tvShowInfo.genres}"
                 android:textColor="@color/white"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
@@ -72,7 +79,7 @@
                     android:id="@+id/tvShowInfoRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="rating"
+                    android:text="@{String.valueOf(viewModel.tvShowInfo.rating.average)}"
                     android:textColor="@color/white"
                     android:layout_marginStart="8dp"
                     android:maxLines="3"
@@ -85,7 +92,7 @@
                 >
                 <TextView
                     android:id="@+id/tvShowSummary"
-                    android:text="Under the Dome is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away"
+                    summary_text="@{viewModel.tvShowInfo.summary}"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:maxLines="3"
