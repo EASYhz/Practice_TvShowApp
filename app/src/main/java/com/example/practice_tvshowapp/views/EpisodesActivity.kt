@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import coil.load
 import com.example.practice_tvshowapp.adapter.EpisodeViewPagerAdapter
 import com.example.practice_tvshowapp.databinding.ActivityEpisodesBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
@@ -15,15 +14,10 @@ import com.example.practice_tvshowapp.factory.EpisodesViewModelFactory
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.types.EpisodesTabsType
 import com.example.practice_tvshowapp.utils.CommonUtils.convertDpToPx
-import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoDate
-import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoGenres
-import com.example.practice_tvshowapp.utils.CommonUtils.getTvShowInfoTime
-import com.example.practice_tvshowapp.utils.LoadingUtils
+import com.example.practice_tvshowapp.utils.LoadingUtils.subscribeToStateFlowShimmer
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import java.io.Serializable
 import javax.inject.Inject
 
@@ -92,14 +86,13 @@ class EpisodesActivity : AppCompatActivity() {
         }
     }
     private fun subscribeToIsLoadingState() {
-        lifecycleScope.launch {
-            episodeViewModel.isLoadingState.collectLatest { isLoading ->
-                LoadingUtils.setLoadingView(
-                    loadingView = binding.episodeSkeletonLoadingView,
-                    mainView = binding.episodeContainerLayout,
-                    isLoading = isLoading
-                )
-            }
+        binding.apply {
+            subscribeToStateFlowShimmer(
+                stateFlow = episodeViewModel.isLoadingState,
+                loadingView = episodeSkeletonLoadingView,
+                mainView = episodeContainerLayout,
+                lifecycleScope = lifecycleScope
+            ) { it -> it}
         }
     }
 

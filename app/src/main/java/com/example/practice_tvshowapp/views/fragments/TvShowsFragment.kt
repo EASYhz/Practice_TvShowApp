@@ -18,8 +18,6 @@ import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.utils.LoadingUtils
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class TvShowsFragment : Fragment() {
     private lateinit var binding: FragmentTvShowsBinding
@@ -79,14 +77,13 @@ class TvShowsFragment : Fragment() {
     }
 
     private fun subscribeToIsLoadingState() {
-        lifecycleScope.launch {
-            tvShowViewModel.isLoadingState.collectLatest { isLoading ->
-                LoadingUtils.setLoadingView(
-                    loadingView = binding.tvShowSkeletonLoadingView,
-                    mainView = binding.tvShowContainerRecyclerView,
-                    isLoading = isLoading
-                )
-            }
+        binding.apply {
+            LoadingUtils.subscribeToStateFlowShimmer(
+                stateFlow = tvShowViewModel.isLoadingState,
+                loadingView = tvShowSkeletonLoadingView,
+                mainView = tvShowContainerRecyclerView,
+                lifecycleScope = lifecycleScope
+            ) { it -> it }
         }
     }
 

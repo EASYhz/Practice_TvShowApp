@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +18,10 @@ import com.example.practice_tvshowapp.databinding.FragmentSearchBinding
 import com.example.practice_tvshowapp.databinding.SearchActionbarLayoutBinding
 import com.example.practice_tvshowapp.models.tvshows.SearchTvShow
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
+import com.example.practice_tvshowapp.utils.LoadingUtils.subscribeToStateFlowVisibility
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collectLatest
 
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
@@ -65,8 +64,16 @@ class SearchFragment : Fragment() {
         setBackButton()
         setSearchTvShowView()
         observeSearchTvShowResponse()
-        subscribeToIsLoadingState()
-        subscribeIsEmptyState()
+        subscribeToStateFlowVisibility(
+            stateFlow = tvShowViewModel.isLoadingState,
+            view = binding.circleLoading,
+            lifecycleScope = lifecycleScope
+        ) { it -> it }
+        subscribeToStateFlowVisibility(
+            stateFlow = tvShowViewModel.isEmptyState,
+            view = binding.emptyTextView,
+            lifecycleScope = lifecycleScope
+        ) { it -> it }
     }
 
     private fun setSearchView() {
@@ -138,17 +145,17 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun subscribeToIsLoadingState() = lifecycleScope.launch {
-        tvShowViewModel.isLoadingState.collectLatest {
-            binding.circleLoading.visibility = if(it) View.VISIBLE else View.INVISIBLE
-        }
-    }
-
-    private fun subscribeIsEmptyState() = lifecycleScope.launch {
-        tvShowViewModel.isEmptyState.collectLatest {
-            binding.emptyTextView.visibility = if(it) View.VISIBLE else View.INVISIBLE
-        }
-    }
+//    private fun subscribeToIsLoadingState() = lifecycleScope.launch {
+//        tvShowViewModel.isLoadingState.collectLatest {
+//            binding.circleLoading.visibility = if(it) View.VISIBLE else View.INVISIBLE
+//        }
+//    }
+//
+//    private fun subscribeIsEmptyState() = lifecycleScope.launch {
+//        tvShowViewModel.isEmptyState.collectLatest {
+//            binding.emptyTextView.visibility = if(it) View.VISIBLE else View.INVISIBLE
+//        }
+//    }
 
     private fun filterTvShows(searchTvShow: SearchTvShow): List<TvShowItem> = searchTvShow.map { it.show }
 }
