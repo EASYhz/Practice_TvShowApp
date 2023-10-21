@@ -46,7 +46,7 @@ class TvShowAdapter(
 
         holder.binding.apply {
             tvShowTitle.text = currentTvShow.name
-            tvShowRating.text = currentTvShow.rating.average.toString()
+            tvShowRating.text = currentTvShow.rating?.average.toString()
             tvShowImageView.load(currentTvShow.image?.original) {
                 crossfade(true)
                 crossfade(1000)

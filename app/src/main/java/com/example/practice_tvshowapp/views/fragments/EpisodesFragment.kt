@@ -11,7 +11,9 @@ import com.example.practice_tvshowapp.adapter.EpisodeAdapter
 import com.example.practice_tvshowapp.databinding.EpisodeContainerLayoutBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EpisodesFragment : Fragment() {
     lateinit var binding: EpisodeContainerLayoutBinding
     private lateinit var episodeAdapter: EpisodeAdapter

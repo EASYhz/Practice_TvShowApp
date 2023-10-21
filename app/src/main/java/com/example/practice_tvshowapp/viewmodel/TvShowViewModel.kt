@@ -6,18 +6,21 @@ import com.example.practice_tvshowapp.models.tvshows.SearchTvShow
 import com.example.practice_tvshowapp.models.tvshows.SearchTvShowItem
 import com.example.practice_tvshowapp.models.tvshows.TvShowContainer
 import com.example.practice_tvshowapp.models.tvshows.TvShowItem
+import com.example.practice_tvshowapp.repository.SavedTvShowRepository
 import com.example.practice_tvshowapp.repository.TvShowRepository
 import com.example.practice_tvshowapp.utils.CommonUtils.getYesterdayDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class TvShowViewModel
 @Inject constructor(
     private val repository: TvShowRepository,
+    private val savedTvShowRepository: SavedTvShowRepository,
 ):ViewModel() {
     private val _tvShowResponse = MutableLiveData<ArrayList<TvShowContainer>>()
     val tvShowResponse: LiveData<ArrayList<TvShowContainer>>
@@ -79,6 +82,15 @@ class TvShowViewModel
         _isLoadingState.value = true
         _isEmptyState.value = false
         _searchTvShowResponse.postValue(SearchTvShow())
+    }
+
+    fun insertTvShow(tvShowItem: TvShowItem) = viewModelScope.launch {
+        Log.d("TvShowViewModel", "insertTvShow $tvShowItem")
+        try {
+            savedTvShowRepository.insertTvShow(tvShowItem)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

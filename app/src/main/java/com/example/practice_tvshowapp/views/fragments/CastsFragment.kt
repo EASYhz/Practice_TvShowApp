@@ -12,8 +12,10 @@ import com.example.practice_tvshowapp.adapter.CastAdapter
 import com.example.practice_tvshowapp.databinding.CastContainerLayoutBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class CastsFragment : Fragment() {
     lateinit var binding: CastContainerLayoutBinding
     private lateinit var castAdapter: CastAdapter
@@ -40,7 +42,7 @@ class CastsFragment : Fragment() {
         binding.root.requestLayout()
     }
     private fun observeCast() {
-        viewModel.tvShowCastResponse.observe(this) { casts ->
+        viewModel.tvShowCastResponse.observe(viewLifecycleOwner) { casts ->
             castAdapter.casts = casts
         }
     }

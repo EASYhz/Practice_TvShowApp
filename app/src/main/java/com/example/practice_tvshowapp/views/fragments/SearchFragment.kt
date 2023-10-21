@@ -21,8 +21,10 @@ import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.utils.LoadingUtils.subscribeToStateFlowVisibility
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
     private lateinit var searchBinding : SearchActionbarLayoutBinding
@@ -140,7 +142,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeSearchTvShowResponse() {
-        tvShowViewModel.searchTvShowResponse.observe(this) {
+        tvShowViewModel.searchTvShowResponse.observe(viewLifecycleOwner) {
             tvShowAdapter.tvShows = filterTvShows(it as SearchTvShow)
         }
     }
