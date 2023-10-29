@@ -51,8 +51,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation ('androidx.test.espresso:espresso-core:3.5.1') {
+        exclude module: "protobuf-lite"
+    }
 
     // (Required) Unit Test 하기 위해 필수
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
@@ -103,7 +107,6 @@ dependencies {
 //    kapt "androidx.room:room-compiler:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
-
 
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
