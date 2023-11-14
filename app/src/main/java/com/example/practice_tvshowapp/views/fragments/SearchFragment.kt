@@ -21,10 +21,10 @@ import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.utils.LoadingUtils.subscribeToStateFlowVisibility
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.*
 
-@AndroidEntryPoint
+@FragmentScoped
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
     private lateinit var searchBinding : SearchActionbarLayoutBinding

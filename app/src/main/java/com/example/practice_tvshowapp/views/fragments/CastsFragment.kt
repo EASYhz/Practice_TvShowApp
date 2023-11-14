@@ -12,10 +12,10 @@ import com.example.practice_tvshowapp.adapter.CastAdapter
 import com.example.practice_tvshowapp.databinding.CastContainerLayoutBinding
 import com.example.practice_tvshowapp.viewmodel.EpisodesViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlin.properties.Delegates
 
-@AndroidEntryPoint
+@FragmentScoped
 class CastsFragment : Fragment() {
     lateinit var binding: CastContainerLayoutBinding
     private lateinit var castAdapter: CastAdapter

@@ -18,9 +18,9 @@ import com.example.practice_tvshowapp.models.tvshows.TvShowItem
 import com.example.practice_tvshowapp.utils.LoadingUtils
 import com.example.practice_tvshowapp.viewmodel.TvShowViewModel
 import com.example.practice_tvshowapp.views.EpisodesActivity
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
 
-@AndroidEntryPoint
+@FragmentScoped
 class TvShowsFragment : Fragment() {
     private lateinit var binding: FragmentTvShowsBinding
     private lateinit var tvShowContainerAdapter: TvShowContainerAdapter
@@ -67,7 +67,7 @@ class TvShowsFragment : Fragment() {
 
 
     private fun observeTvShowItem() {
-        tvShowViewModel.tvShowResponse.observe(this) { tvShowItem ->
+        tvShowViewModel.tvShowResponse.observe(viewLifecycleOwner) { tvShowItem ->
             tvShowContainerAdapter.tvShowContainers = tvShowItem
         }
     }
