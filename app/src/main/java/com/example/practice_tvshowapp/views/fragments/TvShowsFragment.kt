@@ -73,7 +73,6 @@ class TvShowsFragment : Fragment() {
     }
 
     private fun onClickTvShowItem(tvShowItem: TvShowItem) {
-        tvShowViewModel.insertTvShow(tvShowItem)
         val tvShowIntent = Intent(activity, EpisodesActivity::class.java)
         tvShowIntent.putExtra("tvShowItem", tvShowItem)
         startActivity(tvShowIntent)
