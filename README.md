@@ -31,7 +31,7 @@ Using TvMaze API : <https://www.tvmaze.com/api#show-main-information>
 
 ## Tech Stack
 
-|App|![Android](https://img.shields.io/badge/Android-3DDC84.svg?style=for-the-badge&logo=Android&logoColor=white) ![Dart](https://img.shields.io/badge/Kotlin-7F52FF.svg?style=for-the-badge&logo=Kotlin&logoColor=white)|
+|App|![Android](https://img.shields.io/badge/Android-3DDC84.svg?style=for-the-badge&logo=Android&logoColor=white) ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF.svg?style=for-the-badge&logo=Kotlin&logoColor=white)|
 |:------:|:---:|
 |libs| [retrofit2](https://square.github.io/retrofit/) , [coil](https://coil-kt.github.io/coil/) , [Dagger-Hilt](https://dagger.dev/),[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Coroutines](https://developer.android.com/kotlin/coroutines), [Shimmer](https://github.com/facebookarchive/shimmer-android), [RoomDB](https://developer.android.com/training/data-storage/room?hl=ko)  |
 
